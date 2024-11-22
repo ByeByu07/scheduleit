@@ -4,10 +4,11 @@ import { X, Upload } from 'lucide-react';
 interface UploadModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onUpload?: (file: File) => void;
   selectedDate: Date | null;
 }
 
-export default function UploadModal({ isOpen, onClose, selectedDate }: UploadModalProps) {
+export default function UploadModal({ isOpen, onClose, onUpload, selectedDate }: UploadModalProps) {
   const [title, setTitle] = useState('');
   const [file, setFile] = useState<File | null>(null);
 
@@ -15,15 +16,18 @@ export default function UploadModal({ isOpen, onClose, selectedDate }: UploadMod
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file || !selectedDate) return;
+    if (!file) return;
 
     try {
-      // Here you would typically upload the file to your backend
-      console.log('Uploading:', {
-        title,
-        file,
-        date: selectedDate
-      });
+      if (onUpload) {
+        onUpload(file);
+      } else {
+        console.log('Uploading:', {
+          title,
+          file,
+          date: selectedDate
+        });
+      }
       
       // Clear form and close modal
       setTitle('');
