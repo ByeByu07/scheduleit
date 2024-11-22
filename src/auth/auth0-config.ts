@@ -4,5 +4,5 @@ export const auth0Config = {
   authorizationParams: {
     redirect_uri: window.location.origin,
   },
-  cacheLocation: 'localstorage'
+  cacheLocation: 'localstorage' as const
 };
