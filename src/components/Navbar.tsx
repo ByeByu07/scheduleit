@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { User, LogOut, Link as LinkLucide } from 'lucide-react';
 import { useAuthContext } from '../context/auth-context';
 import React from 'react'
+import { SignOutButton } from '@clerk/clerk-react';
 
 interface NavbarProps {
   title: string;
@@ -60,16 +61,18 @@ export default function Navbar({ title, icon }: NavbarProps) {
               <User className="w-4 h-4 mr-2" />
               Profile
             </button>
-            <button
-              onClick={() => {
-                // Handle logout
-                setIsProfileDropdownOpen(false);
-              }}
-              className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center text-red-600"
-            >
-              <LogOut className="w-4 h-4 mr-2" />
-              Logout
-            </button>
+            <SignOutButton>
+              <button
+                onClick={() => {
+                  // Handle logout
+                  setIsProfileDropdownOpen(false);
+                }}
+                className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center text-red-600"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </button>
+            </SignOutButton>
           </div>
         )}
       </div>
