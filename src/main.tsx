@@ -29,14 +29,9 @@ createRoot(document.getElementById('root')!).render(
           logoImageUrl: "",
         },
       }}
-      navigate={(to) => {
-        // Handle navigation in Capacitor
-        if (Capacitor.isNativePlatform()) {
-          window.location.href = to;
-        } else {
-          window.history.pushState({}, '', to);
-        }
-      }}>
+      navigate={(to) => window.location.href = to}
+      allowedRedirectOrigins={['capacitor://*', 'http://*', 'https://*']}
+      >
       <AuthProvider>
         <Router>
           <App />
