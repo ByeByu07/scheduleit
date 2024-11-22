@@ -173,6 +173,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/videos" element={<VideosPage />} />
+                <Route path="/profile" element={<React.lazy(() => import('./pages/Profile'))} />
               </Routes>
             ) : (
               <Navigate to="/sign-in" replace />
