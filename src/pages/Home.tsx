@@ -54,6 +54,7 @@ export default function HomePage() {
       <Navbar 
         title={`Welcome, ${user?.firstName || 'User'}`}
         icon={<CalendarIcon className="w-8 h-8 mr-2 text-blue-500" />}
+        onConnectClick={() => setIsConnectModalOpen(true)}
       />
 
       <div className="grid grid-cols-1 gap-8">

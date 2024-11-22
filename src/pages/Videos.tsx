@@ -88,6 +88,7 @@ const VideosPage: React.FC<{}> = () => {
         <Navbar 
           title="Schedule It"
           icon={<List className="w-8 h-8 mr-2 text-blue-500" />}
+          onConnectClick={() => setIsConnectModalOpen(true)}
         />
         
         {/* Storage Usage Bar */}

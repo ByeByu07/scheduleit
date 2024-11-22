@@ -7,9 +7,10 @@ import { SignOutButton } from '@clerk/clerk-react';
 interface NavbarProps {
   title: string;
   icon: React.ReactNode;
+  onConnectClick: () => void;
 }
 
-export default function Navbar({ title, icon }: NavbarProps) {
+export default function Navbar({ title, icon, onConnectClick }: NavbarProps) {
   const { user } = useAuthContext();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
@@ -43,7 +44,7 @@ export default function Navbar({ title, icon }: NavbarProps) {
           <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
             <button
               onClick={() => {
-                setIsConnectModalOpen(true);
+                onConnectClick();
                 setIsProfileDropdownOpen(false);
               }}
               className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center"
