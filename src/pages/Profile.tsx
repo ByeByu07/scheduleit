@@ -45,8 +45,8 @@ export default function ProfilePage() {
                 <p className="font-medium">{user?.emailAddresses[0]?.emailAddress}</p>
               </div>
             </div>
-            <button className="px-4 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-              Change Email
+            <button className="p-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50" title="Change Email">
+              <Mail className="w-4 h-4 text-gray-600" />
             </button>
           </div>
 
