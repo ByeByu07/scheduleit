@@ -12,7 +12,7 @@
     "cap:build": "npm run build && cap sync",
     "cap:open:android": "cap open android",
     "cap:open:ios": "cap open ios",
-    "cap:run:android": "cap run android",
+    "cap:run:android": "npm run cap:build && cap run android",
     "cap:run:ios": "cap run ios",
     "cap:serve": "vite build && cap sync && cap serve"
   },
