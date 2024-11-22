@@ -1,5 +1,6 @@
 import React from 'react';
-import { User, MailPlus, Lock, Calendar, HardDrive, Mail } from 'lucide-react';
+import { User, MailPlus, Lock, Calendar, HardDrive, Mail, ChevronLeft, Crown } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/auth-context';
 import Navbar from '../components/Navbar';
 
@@ -11,6 +12,13 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
+      <button 
+        onClick={() => useNavigate()('/')}
+        className="mb-4 flex items-center text-gray-600 hover:text-gray-900"
+      >
+        <ChevronLeft className="w-5 h-5" />
+        <span>Back to Home</span>
+      </button>
       <Navbar 
         title="Profile"
         icon={<User className="w-8 h-8 mr-2 text-blue-500" />}
@@ -81,6 +89,20 @@ export default function ProfilePage() {
               {/* Replace with actual scheduled videos */}
               <p className="text-sm text-gray-500">No videos scheduled</p>
             </div>
+          </div>
+
+          {/* Subscription Type */}
+          <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+            <div className="flex items-center">
+              <Crown className="w-5 h-5 text-blue-500 mr-3" />
+              <div>
+                <p className="text-sm text-gray-500">Subscription Type</p>
+                <p className="font-medium">Free Plan</p>
+              </div>
+            </div>
+            <button className="px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+              Upgrade Plan
+            </button>
           </div>
 
           {/* Password Section */}
