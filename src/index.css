@@ -66,3 +66,32 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .custom-calendar .rbc-calendar {
+    @apply font-sans;
+  }
+  
+  .custom-calendar .rbc-toolbar button {
+    @apply focus:outline-none;
+  }
+  
+  .custom-calendar .rbc-event {
+    @apply bg-blue-500;
+  }
+  
+  .custom-calendar .rbc-today {
+    @apply bg-blue-50;
+  }
+  
+  .custom-calendar .rbc-off-range-bg {
+    @apply bg-gray-50;
+  }
+  
+  .custom-calendar .rbc-header {
+    @apply py-2 font-medium text-gray-700;
+  }
+}
