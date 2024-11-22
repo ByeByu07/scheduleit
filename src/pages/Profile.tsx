@@ -8,13 +8,14 @@ const MAX_STORAGE_MB = 1000;
 
 export default function ProfilePage() {
   const { user } = useAuthContext();
+  const navigate = useNavigate();
   const usedStorage = 40.0; // This should be calculated from actual video sizes
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <button 
-        onClick={() => useNavigate()('/')}
-        className="mb-4 flex items-center text-gray-600 hover:text-gray-900"
+        onClick={() => navigate('/')}
+        className="mb-4 flex items-center gap-1 text-gray-600 hover:text-gray-900 active:text-gray-700 touch-manipulation"
       >
         <ChevronLeft className="w-5 h-5" />
         <span>Back to Home</span>
@@ -100,7 +101,7 @@ export default function ProfilePage() {
                 <p className="font-medium">Free Plan</p>
               </div>
             </div>
-            <button className="px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+            <button className="px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 active:bg-blue-700 touch-manipulation">
               Upgrade Plan
             </button>
           </div>
@@ -114,7 +115,7 @@ export default function ProfilePage() {
                 <p className="font-medium">••••••••</p>
               </div>
             </div>
-            <button className="px-4 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+            <button className="px-4 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50 active:bg-gray-100 touch-manipulation">
               Change Password
             </button>
           </div>
