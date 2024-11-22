@@ -11,7 +11,7 @@ const config: CapacitorConfig = {
       'clerk.com',
       '*.clerk.com',
       '*.clerk.accounts.dev'
-    ]
+    ],
   },
   plugins: {
     CapacitorHttp: {
