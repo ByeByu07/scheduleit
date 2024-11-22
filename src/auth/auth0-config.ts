@@ -3,6 +3,7 @@ export const auth0Config = {
   clientId: import.meta.env.VITE_AUTH0_CLIENT_ID || '',
   authorizationParams: {
     redirect_uri: window.location.origin,
+    screen_hint: 'signup',
   },
   cacheLocation: 'localstorage' as const
 };

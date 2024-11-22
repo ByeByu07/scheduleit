@@ -10,7 +10,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ title, icon, onConnectClick }: NavbarProps) {
-  const { logout } = useAuth0();
+  const { loginWithRedirect, logout } = useAuth0();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
