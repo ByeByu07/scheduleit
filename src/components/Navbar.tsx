@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { User, LogOut, Link as LinkLucide } from 'lucide-react';
-import { useAuthContext } from '../context/auth-context';
+import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react'
 
 interface NavbarProps {
@@ -10,7 +10,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ title, icon, onConnectClick }: NavbarProps) {
-  const { user } = useAuthContext();
+  const { logout } = useAuth0();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);

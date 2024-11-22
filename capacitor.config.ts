@@ -8,9 +8,8 @@ const config: CapacitorConfig = {
     androidScheme: 'https',
     cleartext: true,
     allowNavigation: [
-      'clerk.com',
-      '*.clerk.com',
-      '*.clerk.accounts.dev'
+      'auth0.com',
+      '*.auth0.com'
     ],
   },
   plugins: {

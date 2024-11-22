@@ -154,12 +154,7 @@ function App() {
           path="/sign-in/*"
           element={
             <div className="min-h-screen flex items-center justify-center">
-              <SignIn 
-                routing="path" 
-                path="/sign-in" 
-                redirectUrl={Capacitor.isNativePlatform() ? '/' : window.location.origin}
-                afterSignInUrl={Capacitor.isNativePlatform() ? '/' : window.location.origin}
-              />
+              <div>Redirecting to Auth0 login...</div>
             </div>
           }
         />
@@ -167,12 +162,7 @@ function App() {
           path="/sign-up/*"
           element={
             <div className="min-h-screen flex items-center justify-center">
-              <SignUp 
-                routing="path" 
-                path="/sign-up"
-                redirectUrl={Capacitor.isNativePlatform() ? '/' : window.location.origin}
-                afterSignUpUrl={Capacitor.isNativePlatform() ? '/' : window.location.origin}
-              />
+              <div>Redirecting to Auth0 signup...</div>
             </div>
           }
         />

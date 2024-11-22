@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar';
 const MAX_STORAGE_MB = 1000;
 
 export default function ProfilePage() {
-  const { user } = useAuth0();
+  const { user, logout } = useAuth0();
   const navigate = useNavigate();
   const usedStorage = 40.0; // This should be calculated from actual video sizes
 
@@ -51,7 +51,7 @@ export default function ProfilePage() {
               <Mail className="w-5 h-5 text-blue-500 mr-3" />
               <div>
                 <p className="text-sm text-gray-500">Email</p>
-                <p className="font-medium">{user?.emailAddresses[0]?.emailAddress}</p>
+                <p className="font-medium">{user?.email}</p>
               </div>
             </div>
             <button 
