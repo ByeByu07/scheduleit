@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { SignIn, SignUp } from '@clerk/clerk-react';
-import { useAuthContext } from './context/auth-context';
+import { useAuth0 } from '@auth0/auth0-react';
 import { DndContext, DragEndEvent, closestCenter } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { Capacitor } from '@capacitor/core';
@@ -138,9 +137,9 @@ function App() {
     setIsUploadModalOpen(true);
   };
 
-  const { isLoaded, isSignedIn } = useAuthContext();
+  const { isLoading, isAuthenticated } = useAuth0();
 
-  if (!isLoaded) {
+  if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -180,7 +179,7 @@ function App() {
         <Route
           path="/*"
           element={
-            isSignedIn ? (
+            isAuthenticated ? (
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/videos" element={<VideosPage />} />

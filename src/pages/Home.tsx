@@ -7,13 +7,13 @@ import Calendar from '../components/Calendar';
 import ConnectModal from '../components/ConnectModal';
 import UploadModal from '../components/UploadModal';
 import BottomNav from '../components/BottomNav';
-import { useAuthContext } from '../context/auth-context';
+import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react';
 
 const MAX_STORAGE_MB = 1000;
 
 export default function HomePage() {
-  const { user } = useAuthContext();
+  const { user } = useAuth0();
   const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);

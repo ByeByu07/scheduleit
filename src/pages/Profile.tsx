@@ -1,13 +1,13 @@
 import React from 'react';
 import { User, MailPlus, Lock, Calendar, HardDrive, Mail, ChevronLeft, Crown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../context/auth-context';
+import { useAuth0 } from '@auth0/auth0-react';
 import Navbar from '../components/Navbar';
 
 const MAX_STORAGE_MB = 1000;
 
 export default function ProfilePage() {
-  const { user } = useAuthContext();
+  const { user } = useAuth0();
   const navigate = useNavigate();
   const usedStorage = 40.0; // This should be calculated from actual video sizes
 
