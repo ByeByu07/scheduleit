@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, MailPlus, Lock, Calendar, HardDrive } from 'lucide-react';
+import { User, MailPlus, Lock, Calendar, HardDrive, Mail } from 'lucide-react';
 import { useAuthContext } from '../context/auth-context';
 import Navbar from '../components/Navbar';
 
@@ -50,7 +50,7 @@ export default function ProfilePage() {
               title="Change Email"
             >
               <MailPlus className="w-4 h-4 text-gray-600" />
-              <span>Change</span>
+              {/* <span>Change</span> */}
             </button>
           </div>
 
