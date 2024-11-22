@@ -7,6 +7,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { Capacitor } from '@capacitor/core';
 import VideosPage from './pages/Videos';
 import HomePage from './pages/Home';
+import ProfilePage from './pages/Profile';
 import React from 'react';
 
 const MAX_STORAGE_MB = 1000; // 1GB max storage
@@ -173,7 +174,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/videos" element={<VideosPage />} />
-                <Route path="/profile" element={<React.lazy(() => import('./pages/Profile'))} />
+                <Route path="/profile" element={<ProfilePage/>} />
               </Routes>
             ) : (
               <Navigate to="/sign-in" replace />
