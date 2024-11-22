@@ -36,7 +36,7 @@ createRoot(document.getElementById('root')!).render(
         } else {
           window.history.pushState({}, '', to);
         }
-      }}
+      }}>
       <AuthProvider>
         <Router>
           <App />
