@@ -11,7 +11,7 @@ import { auth0Config } from './auth/auth0-config';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Auth0Provider {...auth0Config}>
+    <Auth0Provider {...auth0Config} useRefreshTokens={true} useRefreshTokensFallback={false}>
       <Router>
         <App />
       </Router>

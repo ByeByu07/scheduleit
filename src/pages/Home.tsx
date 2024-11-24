@@ -52,7 +52,7 @@ export default function HomePage() {
   return (
     <div className="max-w-7xl mx-auto px-2 py-4 sm:px-4 sm:py-8">
       <Navbar 
-        title={`Welcome, ${user?.firstName || 'User'}`}
+        title={`Welcome, ${user?.name || 'User'}`}
         icon={<CalendarIcon className="w-8 h-8 mr-2 text-blue-500" />}
         onConnectClick={() => setIsConnectModalOpen(true)}
       />
@@ -65,7 +65,6 @@ export default function HomePage() {
             selectable={true}
           />
         </div>
-        <p className='text-white'>hah</p>
       </div>
 
       <ConnectModal 

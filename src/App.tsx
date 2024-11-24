@@ -8,6 +8,8 @@ import VideosPage from './pages/Videos';
 import HomePage from './pages/Home';
 import ProfilePage from './pages/Profile';
 import React from 'react';
+import { Browser } from '@capacitor/browser';
+import { App as CapApp } from '@capacitor/app';
 
 const MAX_STORAGE_MB = 1000; // 1GB max storage
 
@@ -137,7 +139,28 @@ function App() {
     setIsUploadModalOpen(true);
   };
 
-  const { isLoading, isAuthenticated } = useAuth0();
+  const { isLoading, isAuthenticated, loginWithRedirect, handleRedirectCallback } = useAuth0();
+  
+  useEffect(() => {
+    console.log('Loading:', isLoading);
+    console.log('Authenticated:', isAuthenticated);
+  }, [isLoading, isAuthenticated]);
+
+  useEffect(() => {
+    // Handle the 'appUrlOpen' event and call `handleRedirectCallback`
+    CapApp.addListener('appUrlOpen', async ({ url }) => {
+      if (url.startsWith(import.meta.env.VITE_URI_APP_MOBILE)) {
+        if (
+          url.includes("state") &&
+          (url.includes("code") || url.includes("error"))
+        ) {
+          await handleRedirectCallback(url);
+        }
+
+        await Browser.close();
+      }
+    });
+  }, [handleRedirectCallback]);
 
   if (isLoading) {
     return (
@@ -146,6 +169,7 @@ function App() {
       </div>
     );
   }
+
 
   return (
     <div className="min-h-screen bg-gray-100 pb-20">
@@ -164,7 +188,15 @@ function App() {
                 <div className="text-center">
                   <h2 className="text-2xl font-bold mb-4">Welcome to Schedule It</h2>
                   <button
-                    onClick={() => loginWithRedirect()}
+                    onClick={() => loginWithRedirect({
+                      async openUrl(url) {
+                        // Redirect using Capacitor's Browser plugin
+                       await Browser.open({
+                         url,
+                         windowName: "_self"
+                       });
+                     }
+                    })}
                     className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
                   >
                     Log In

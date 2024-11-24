@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { User, LogOut, Link as LinkLucide } from 'lucide-react';
 import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react'
+import { Browser } from '@capacitor/browser';
 
 interface NavbarProps {
   title: string;
@@ -64,6 +65,18 @@ export default function Navbar({ title, icon, onConnectClick }: NavbarProps) {
               <button
                 onClick={() => {
                   // Handle logout
+                  logout({
+                    logoutParams: {
+                      returnTo: import.meta.env.VITE_URI_APP_MOBILE,
+                    },
+                    async openUrl(url) {
+                       // Redirect using Capacitor's Browser plugin
+                      await Browser.open({
+                        url,
+                        windowName: "_self"
+                      });
+                    }
+                  });
                   setIsProfileDropdownOpen(false);
                 }}
                 className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center text-red-600"
