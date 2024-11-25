@@ -16,20 +16,20 @@ const GetStarted = ({ onLoginClick }: GetStartedProps) => {
     {
       icon: <FiCalendar className="w-16 h-16 text-blue-500" />,
       title: "Smart Scheduling",
-      description: "Effortlessly plan and organize your video content with our intuitive calendar interface",
-      illustration: "https://illustrations.popsy.co/amber/calendar.svg"
+      description: "Effortlessly plan and organize your video content",
+      illustration: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23EBF4FF'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%234299E1'/%3E%3C/svg%3E"
     },
     {
       icon: <FiLock className="w-16 h-16 text-blue-500" />,
       title: "Secure Storage",
-      description: "Your content is safely stored with enterprise-grade encryption and backup",
-      illustration: "https://illustrations.popsy.co/amber/security.svg"
+      description: "Your content is safely stored and encrypted",
+      illustration: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23E6FFFA'/%3E%3Cpolygon points='50,20 80,80 20,80' fill='%2338B2AC'/%3E%3C/svg%3E"
     },
     {
       icon: <FiUserPlus className="w-16 h-16 text-blue-500" />,
       title: "Collaboration",
-      description: "Work together with your team in real-time, share content, and manage permissions",
-      illustration: "https://illustrations.popsy.co/amber/team.svg"
+      description: "Share and collaborate with your team seamlessly",
+      illustration: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FFF5F5'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23F56565'/%3E%3C/svg%3E"
     }
   ];
 
@@ -40,7 +40,7 @@ const GetStarted = ({ onLoginClick }: GetStartedProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white px-4 py-8 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white px-4 py-8">
       <AnimatePresence mode="wait">
         {currentStep < features.length ? (
           <motion.div
@@ -119,43 +119,64 @@ const GetStarted = ({ onLoginClick }: GetStartedProps) => {
             </button>
           </div>
 
-          <div className="space-y-6">
-            <div className="text-center space-y-2">
-              <h3 className="text-xl font-semibold text-gray-800">
-                {activeTab === 'login' ? 'Welcome back!' : 'Join our community'}
-              </h3>
-              <p className="text-gray-600">
-                {activeTab === 'login' 
-                  ? 'Sign in to access your scheduled content and continue your journey'
-                  : 'Create an account to start organizing your video content effectively'}
-              </p>
+          <form className="space-y-4">
+            <div>
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
             </div>
+            <div>
+              <input
+                type="password"
+                placeholder="Password"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            {activeTab === 'login' && (
+              <div className="text-right">
+                <a href="#" className="text-sm text-blue-500 hover:text-blue-600">Forgot Password?</a>
+              </div>
+            )}
 
             <button
               type="button"
               onClick={onLoginClick}
-              className="w-full flex items-center justify-center px-4 py-3 border rounded-lg hover:bg-gray-50 transition-colors"
+              className="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
             >
-              <FcGoogle className="w-6 h-6 mr-3" />
-              <span className="text-gray-700 font-medium">
-                {activeTab === 'login' ? 'Continue with Google' : 'Sign up with Google'}
-              </span>
+              {activeTab === 'login' ? 'Login' : 'Sign Up'}
             </button>
 
-            <div className="text-center text-sm text-gray-500">
-              <p>
-                {activeTab === 'login' 
-                  ? "Don't have an account? " 
-                  : "Already have an account? "}
-                <button 
-                  onClick={() => setActiveTab(activeTab === 'login' ? 'signup' : 'login')}
-                  className="text-blue-500 hover:text-blue-600 font-medium"
-                >
-                  {activeTab === 'login' ? 'Sign up' : 'Log in'}
-                </button>
-              </p>
+            <div className="relative my-4">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">Or continue with</span>
+              </div>
             </div>
-          </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <button
+                type="button"
+                className="flex items-center justify-center px-4 py-2 border rounded-lg hover:bg-gray-50"
+                onClick={onLoginClick}
+              >
+                <FcGoogle className="w-5 h-5 mr-2" />
+                Google
+              </button>
+              <button
+                type="button"
+                className="flex items-center justify-center px-4 py-2 border rounded-lg hover:bg-gray-50"
+                onClick={onLoginClick}
+              >
+                <FaFacebook className="w-5 h-5 mr-2 text-blue-600" />
+                Facebook
+              </button>
+            </div>
+          </form>
         </motion.div>
       )}
       </AnimatePresence>
