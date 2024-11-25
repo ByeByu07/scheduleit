@@ -177,8 +177,9 @@ const GetStarted = ({ onLoginClick }: GetStartedProps) => {
               </button>
             </div>
           </form>
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </div>
   );
 };
