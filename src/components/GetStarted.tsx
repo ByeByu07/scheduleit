@@ -1,74 +1,118 @@
 import React, { useState } from 'react';
-import { FiCalendar, FiLock, FiUserPlus } from 'react-icons/fi';
+import { FiCalendar, FiLock, FiUserPlus, FiArrowRight } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface GetStartedProps {
   onLoginClick: () => void;
 }
 
 const GetStarted = ({ onLoginClick }: GetStartedProps) => {
-  const [activeTab, setActiveTab] = useState<'welcome' | 'login' | 'signup'>('welcome');
+  const [currentStep, setCurrentStep] = useState(0);
+  const [activeTab, setActiveTab] = useState<'login' | 'signup'>('login');
 
   const features = [
     {
-      icon: <FiCalendar className="w-8 h-8 text-blue-500" />,
+      icon: <FiCalendar className="w-16 h-16 text-blue-500" />,
       title: "Smart Scheduling",
-      description: "Effortlessly plan and organize your video content"
+      description: "Effortlessly plan and organize your video content",
+      illustration: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23EBF4FF'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%234299E1'/%3E%3C/svg%3E"
     },
     {
-      icon: <FiLock className="w-8 h-8 text-blue-500" />,
+      icon: <FiLock className="w-16 h-16 text-blue-500" />,
       title: "Secure Storage",
-      description: "Your content is safely stored and encrypted"
+      description: "Your content is safely stored and encrypted",
+      illustration: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23E6FFFA'/%3E%3Cpolygon points='50,20 80,80 20,80' fill='%2338B2AC'/%3E%3C/svg%3E"
     },
     {
-      icon: <FiUserPlus className="w-8 h-8 text-blue-500" />,
+      icon: <FiUserPlus className="w-16 h-16 text-blue-500" />,
       title: "Collaboration",
-      description: "Share and collaborate with your team seamlessly"
+      description: "Share and collaborate with your team seamlessly",
+      illustration: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FFF5F5'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23F56565'/%3E%3C/svg%3E"
     }
   ];
 
+  const handleNext = () => {
+    if (currentStep < features.length) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white px-4 py-8">
-      {activeTab === 'welcome' && (
-        <div className="max-w-md mx-auto space-y-8">
-          <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome to Schedule It</h1>
-            <p className="text-gray-600">Your ultimate video content planning solution</p>
-          </div>
+      <AnimatePresence mode="wait">
+        {currentStep < features.length ? (
+          <motion.div
+            key={`feature-${currentStep}`}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-md mx-auto space-y-8"
+          >
+            <div className="text-center">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome to Schedule It</h1>
+              <p className="text-gray-600">Your ultimate video content planning solution</p>
+            </div>
 
-          <div className="space-y-6">
-            {features.map((feature, index) => (
-              <div key={index} className="bg-white p-4 rounded-lg shadow-md flex items-start space-x-4">
-                <div className="flex-shrink-0">{feature.icon}</div>
-                <div>
-                  <h3 className="font-semibold text-gray-900">{feature.title}</h3>
-                  <p className="text-gray-600 text-sm">{feature.description}</p>
+            <div className="relative">
+              <div className="absolute top-0 right-0 text-sm text-gray-500">
+                Step {currentStep + 1} of {features.length}
+              </div>
+              <div className="bg-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <div className="text-center space-y-6">
+                  {features[currentStep].icon}
+                  <img
+                    src={features[currentStep].illustration}
+                    alt={features[currentStep].title}
+                    className="w-48 h-48 mx-auto"
+                  />
+                  <h3 className="text-2xl font-bold text-gray-900">{features[currentStep].title}</h3>
+                  <p className="text-gray-600">{features[currentStep].description}</p>
                 </div>
               </div>
-            ))}
+            </div>
+
+            <button
+              onClick={handleNext}
+              className="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors flex items-center justify-center space-x-2"
+            >
+              <span>Next</span>
+              <FiArrowRight />
+            </button>
+          </motion.div>
+        ) : (
+        <motion.div
+          key="auth-form"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-md mx-auto bg-white rounded-xl shadow-lg p-8"
+        >
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-gray-900">Join Schedule It</h2>
+            <p className="text-gray-600 mt-2">Start organizing your content today</p>
           </div>
 
-          <button
-            onClick={() => setActiveTab('login')}
-            className="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
-          >
-            Get Started
-          </button>
-        </div>
-      )}
-
-      {(activeTab === 'login' || activeTab === 'signup') && (
-        <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg p-6">
-          <div className="flex mb-6">
+          <div className="flex mb-6 bg-gray-100 p-1 rounded-lg">
             <button
-              className={`flex-1 py-2 text-center ${activeTab === 'login' ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-500'}`}
+              className={`flex-1 py-2 text-center rounded-md transition-all duration-300 ${
+                activeTab === 'login'
+                  ? 'bg-white text-blue-500 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
               onClick={() => setActiveTab('login')}
             >
               Login
             </button>
             <button
-              className={`flex-1 py-2 text-center ${activeTab === 'signup' ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-500'}`}
+              className={`flex-1 py-2 text-center rounded-md transition-all duration-300 ${
+                activeTab === 'signup'
+                  ? 'bg-white text-blue-500 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
               onClick={() => setActiveTab('signup')}
             >
               Sign Up
